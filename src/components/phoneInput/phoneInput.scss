@@ -1,0 +1,15 @@
+.box {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.phone-input {
+  width: 100%;
+  padding: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 0 0 4px gray;
+}

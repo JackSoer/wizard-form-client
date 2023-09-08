@@ -1,0 +1,29 @@
+.input {
+  width: 100%;
+  padding: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 0 0 4px gray;
+
+  &:invalid[focused='true'] {
+    box-shadow: 0 0 4px red;
+  }
+}
+
+.box {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.error {
+  color: red;
+  margin-top: 4px;
+  display: none;
+}
+
+.input:invalid[focused='true'] ~ .error {
+  display: block;
+}

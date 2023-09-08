@@ -1,0 +1,19 @@
+.members {
+  width: 100%;
+  padding: 15px 0;
+
+  .members__table {
+    table-layout: fixed;
+    width: 1000px;
+    margin: 0 auto;
+  }
+
+  &__table-row {
+    height: 50px;
+  }
+
+  &__table-col-title {
+    font-size: 25px;
+    font-weight: 700;
+  }
+}

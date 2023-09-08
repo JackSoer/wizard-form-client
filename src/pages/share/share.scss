@@ -1,0 +1,33 @@
+@import '../../scss/var';
+
+.share {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__btns {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__members-link {
+    text-align: center;
+
+    a {
+      color: $mainTextColor;
+      font-weight: 700;
+      font-size: 20px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: rgba(19, 15, 255, 0.582);
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+@import '../../scss/var';
+
+.user-form {
+  width: 700px;
+  margin: 50px;
+
+  &__error {
+    color: red;
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 30px;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__current-step {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  &__btns {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  &__date-input {
+    width: 100%;
+    padding: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0 0 4px gray;
+  }
+
+  &__btn {
+    color: white;
+    background-color: $mainTextColor;
+    padding: 15px 0;
+    width: 90px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba(49, 46, 255, 0.815);
+    }
+
+    &:last-child {
+      margin-left: auto;
+    }
+  }
+
+  &__select {
+    padding: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0 0 4px gray;
+  }
+
+  &__select-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  &__select,
+  &__date {
+    width: 180px;
+  }
+
+  &__date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  &__textarea {
+    max-width: 400px;
+    padding: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    height: 200px;
+    box-shadow: 0 0 4px gray;
+  }
+
+  &__box {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  &__extra-info {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+  }
+}
