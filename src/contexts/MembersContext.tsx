@@ -6,13 +6,19 @@ import { useLocation } from 'react-router-dom';
 
 type MembersInitStateType = {
   members: UserType[];
+  isLoading: boolean;
+  fetchError: string;
 };
 
 type MembersContextProviderType = {
   children: ReactNode;
 };
 
-const INIT_STATE: MembersInitStateType = { members: [] };
+const INIT_STATE: MembersInitStateType = {
+  members: [],
+  isLoading: false,
+  fetchError: '',
+};
 
 const MembersContext = createContext(INIT_STATE);
 
@@ -21,19 +27,27 @@ export const MembersContextProvider = ({
 }: MembersContextProviderType) => {
   const { pathname } = useLocation();
   const [members, setMembers] = useState<UserType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [fetchError, setFetchError] = useState('');
 
   useEffect(() => {
     const fetchMembers = async () => {
       try {
+        setIsLoading(true);
+
         const response = await axios.get('/users');
 
         setMembers(response?.data?.users);
-      } catch (err) {
+
+        setFetchError('');
+      } catch (err: any) {
         if (err instanceof AxiosError) {
-          console.log(err?.response?.data?.message);
+          setFetchError(err.message);
         }
 
-        console.log(err);
+        setFetchError(err.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -44,6 +58,8 @@ export const MembersContextProvider = ({
     <MembersContext.Provider
       value={{
         members,
+        isLoading,
+        fetchError,
       }}
     >
       {children}

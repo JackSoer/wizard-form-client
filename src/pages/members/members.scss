@@ -17,3 +17,18 @@
     font-weight: 700;
   }
 }
+
+.not-found,
+.fetch-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.fetch-error {
+  color: red;
+}

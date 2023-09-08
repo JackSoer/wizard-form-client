@@ -1,4 +1,5 @@
 import loadingImg from '../../assets/images/loading.svg';
+import './loading.scss';
 
 const Loading = () => {
   return (
