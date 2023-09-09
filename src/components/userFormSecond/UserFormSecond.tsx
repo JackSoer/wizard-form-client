@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import inputData from '../../data/inputData';
 import UserType from '../../types/UserType.type';
 import Input from '../input/Input';
@@ -12,7 +13,7 @@ const UserFormSecond = ({
   user,
   updateUserFields,
   onChange,
-}: UserFormSecondProps) => {
+}: UserFormSecondProps): ReactElement => {
   return (
     <>
       {inputData.secondPart.map((input) => (
@@ -23,7 +24,7 @@ const UserFormSecond = ({
           key={input.id}
         />
       ))}
-      <div className="user-form__box">
+      <div className="box">
         <label htmlFor="aboutMe" className="user-form__label">
           About Me
         </label>
@@ -35,7 +36,7 @@ const UserFormSecond = ({
           onChange={(e) => updateUserFields({ aboutMe: e.target.value })}
         ></textarea>
       </div>
-      <div className="user-form__box">
+      <div className="box">
         <label htmlFor="photo" className="user-form__label">
           Photo
         </label>

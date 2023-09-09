@@ -6,11 +6,11 @@ import {
   useLoadScript,
 } from '@react-google-maps/api';
 import locationInfo, { LocationInfoType } from '../../config/map';
-import { useMemo, useState } from 'react';
+import { ReactElement, useMemo, useState } from 'react';
 import holywoodImg from '../../assets/images/7060-HOLLYWOOD.jpg';
 import Loading from '../Loading/Loading';
 
-const Map = () => {
+const Map = (): ReactElement => {
   const [selectedInfo, setSelectedInfo] = useState<null | LocationInfoType>(
     null
   );

@@ -1,10 +1,10 @@
-import { useContext } from 'react';
+import { ReactElement, useContext } from 'react';
 import Loading from '../../components/Loading/Loading';
 import MembersTableContent from '../../components/membersTableContent/MembersTableContent';
 import MembersContext from '../../contexts/MembersContext';
 import './members.scss';
 
-const Members = () => {
+const Members = (): ReactElement => {
   const { members, isLoading, fetchError } = useContext(MembersContext);
 
   return (

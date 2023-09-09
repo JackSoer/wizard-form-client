@@ -26,6 +26,7 @@ export const MembersContextProvider = ({
   children,
 }: MembersContextProviderType) => {
   const { pathname } = useLocation();
+
   const [members, setMembers] = useState<UserType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchError, setFetchError] = useState('');

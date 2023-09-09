@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import './input.scss';
 
-const Input = (props: any) => {
+const Input = (props: any): ReactElement => {
   const [focused, setFocused] = useState(false);
   const { label, onChange, errorMsg, ...inputProps } = props;
 

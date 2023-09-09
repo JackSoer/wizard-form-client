@@ -1,16 +1,42 @@
+@import '../../scss/mixins';
+
 .member-row {
   width: 100%;
-  height: 100px;
 
   &__item {
     width: 25%;
-    height: 250px;
+    height: 150px;
     text-align: center;
 
     a {
       font-size: 20px;
       font-weight: 500;
-      word-wrap: break-word;
+      word-break: break-word;
+      padding: 5px;
+
+      @include tablet {
+        font-size: 18px;
+      }
+
+      @media (max-width: 650px) {
+        font-size: 16px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      height: 100px;
+    }
+
+    @media (max-width: 480px) {
+      height: 80px;
+    }
+
+    @media (max-width: 430px) {
+      height: 50px;
     }
   }
 
@@ -24,5 +50,18 @@
     font-size: 20px;
     word-wrap: break-word;
     font-weight: 500;
+    padding: 5px;
+
+    @include tablet {
+      font-size: 18px;
+    }
+
+    @media (max-width: 650px) {
+      font-size: 16px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 14px;
+    }
   }
 }

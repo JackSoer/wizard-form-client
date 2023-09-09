@@ -1,4 +1,4 @@
-import { FormEvent, useState, useEffect } from 'react';
+import { FormEvent, useState, useEffect, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useMultiform from '../../hooks/useMultiform';
 import UserType from '../../types/UserType.type';
@@ -22,13 +22,13 @@ const INITIAL_STATE: UserType = {
   photo: '',
 };
 
-const UserForm = () => {
+const UserForm = (): ReactElement => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState<UserType>(
     JSON.parse(localStorage.getItem('user') as string) || INITIAL_STATE
   );
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState([]);
 
   const updateUserFields = (userNewFields: Partial<UserType>) => {
     setUser((userPrev) => {
@@ -74,14 +74,14 @@ const UserForm = () => {
 
         localStorage.setItem('userId', JSON.stringify(response.data?.userId));
 
-        setError('');
+        setErrors([]);
 
         next();
       } catch (err) {
         console.log(err);
 
         if (err instanceof AxiosError) {
-          setError(err?.response?.data?.errors[0]);
+          setErrors(err?.response?.data?.errors);
         }
       }
     } else {
@@ -89,7 +89,7 @@ const UserForm = () => {
         const userId = JSON.parse(localStorage.getItem('userId') || '-1');
         await axios.post(`/users/${userId}`, formData);
 
-        setError('');
+        setErrors([]);
 
         clearLocalStorage();
 
@@ -98,7 +98,7 @@ const UserForm = () => {
         console.log(err);
 
         if (err instanceof AxiosError) {
-          setError(err?.response?.data?.errors[0]);
+          setErrors(err?.response?.data?.errors);
         }
       }
     }
@@ -136,7 +136,12 @@ const UserForm = () => {
         <div className="user-form__current-step">
           {currentStep + 1} / {steps.length}
         </div>
-        {error && <p className="user-form__error">{error}</p>}
+        {errors &&
+          errors.map((error) => (
+            <p className="user-form__error" key={error}>
+              {error}
+            </p>
+          ))}
         {step}
         <div className="user-form__btns">
           <button className="user-form__btn">

@@ -10,8 +10,12 @@
   }
 }
 
+.label {
+  margin-bottom: 3px;
+}
+
 .box {
-  width: 400px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,6 +26,8 @@
   color: red;
   margin-top: 4px;
   display: none;
+  font-size: 12px;
+  line-height: 15px;
 }
 
 .input:invalid[focused='true'] ~ .error {

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, ReactElement, useState } from 'react';
 import UserType from '../../types/UserType.type';
 import './phoneInput.scss';
 
@@ -6,7 +6,7 @@ type PhoneInputProps = {
   updateUserFields: (userNewFields: Partial<UserType>) => void;
 };
 
-const PhoneInput = ({ updateUserFields }: PhoneInputProps) => {
+const PhoneInput = ({ updateUserFields }: PhoneInputProps): ReactElement => {
   const [inputValue, setInputValue] = useState('');
 
   const formatPhoneNumber = (value: string): string => {

@@ -26,7 +26,9 @@ const MembersTableRow = ({
         <p className="member-row__text">{reportSubject}</p>
       </td>
       <td className="member-row__item">
-        <a href={`mailto:${email}`}>{email}</a>
+        <a href={`mailto:${email}`} target="_blank">
+          {email}
+        </a>
       </td>
     </tr>
   );

@@ -1,8 +1,8 @@
-import { useContext } from 'react';
+import { ReactElement, useContext } from 'react';
 import MembersTableRow from '../../components/membersTableRow/MembersTableRow';
 import MembersContext from '../../contexts/MembersContext';
 
-const MembersTableContent = () => {
+const MembersTableContent = (): ReactElement => {
   const { members } = useContext(MembersContext);
 
   return (
