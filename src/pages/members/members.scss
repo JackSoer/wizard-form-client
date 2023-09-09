@@ -28,10 +28,6 @@
     }
 
     @media (max-width: 650px) {
-      font-size: 18px;
-    }
-
-    @media (max-width: 650px) {
       font-size: 16px;
     }
 
@@ -50,6 +46,10 @@
   height: 100%;
   font-size: 30px;
   font-weight: 700;
+
+  @media (max-width: 650px) {
+    font-size: 18px;
+  }
 }
 
 .fetch-error {
