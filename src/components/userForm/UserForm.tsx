@@ -81,7 +81,7 @@ const UserForm = (): ReactElement => {
         console.log(err);
 
         if (err instanceof AxiosError) {
-          setErrors(err?.response?.data?.errors);
+          setErrors(err?.response?.data?.errors || [err.message]);
         }
       }
     } else {
@@ -98,7 +98,7 @@ const UserForm = (): ReactElement => {
         console.log(err);
 
         if (err instanceof AxiosError) {
-          setErrors(err?.response?.data?.errors);
+          setErrors(err?.response?.data?.errors || [err.message]);
         }
       }
     }

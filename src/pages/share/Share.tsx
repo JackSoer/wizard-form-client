@@ -18,8 +18,7 @@ const Share = () => {
       <div className="container">
         <div className="share__btns">
           <TwitterShareButton
-            url="http://localhost:5173/register"
-            quote={shareInfo.tw}
+            url="http://91.107.207.176:81"
             title={shareInfo.tw}
           >
             <TwitterIcon round={true}></TwitterIcon>
@@ -27,7 +26,7 @@ const Share = () => {
           <FacebookShareButton
             quote={shareInfo.tw}
             title={shareInfo.tw}
-            url="http://localhost:5173/register"
+            url="http://91.107.207.176:81"
           >
             <FacebookIcon round={true}></FacebookIcon>
           </FacebookShareButton>

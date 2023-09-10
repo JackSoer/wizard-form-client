@@ -7,7 +7,7 @@ const MembersTableContent = (): ReactElement => {
 
   return (
     <tbody>
-      {members.map((member) => {
+      {members.reverse().map((member) => {
         const fullName = `${member.firstName}  ${member.lastName}`;
 
         return (
