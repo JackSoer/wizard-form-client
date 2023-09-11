@@ -1,13 +1,30 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import './input.scss';
 
 const Input = (props: any): ReactElement => {
   const [focused, setFocused] = useState(false);
-  const { label, onChange, errorMsg, ...inputProps } = props;
-
+  const [changed, setChanged] = useState(false);
+  const {
+    label,
+    nextWasClicked,
+    serverErrMsg,
+    onChange,
+    errorMsg,
+    ...inputProps
+  } = props;
   const handleFocus = () => {
     setFocused(true);
   };
+
+  const onHandleChange = (e: any) => {
+    setChanged(true);
+
+    onChange(e);
+  };
+
+  useEffect(() => {
+    setChanged(false);
+  }, [nextWasClicked]);
 
   return (
     <div className="box">
@@ -16,12 +33,15 @@ const Input = (props: any): ReactElement => {
       </label>
       <input
         className="input"
-        onChange={onChange}
+        onChange={onHandleChange}
         {...inputProps}
         onBlur={handleFocus}
         focused={focused.toString()}
       />
-      <span className="error">{errorMsg}</span>
+      {errorMsg && <span className="pattern-error">{errorMsg}</span>}
+      {serverErrMsg && !changed && (
+        <span className="error">{serverErrMsg}</span>
+      )}
     </div>
   );
 };

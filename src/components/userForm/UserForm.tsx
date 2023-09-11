@@ -29,6 +29,7 @@ const UserForm = (): ReactElement => {
     JSON.parse(localStorage.getItem('user') as string) || INITIAL_STATE
   );
   const [errors, setErrors] = useState([]);
+  const [nextWasClicked, setNextWasClicked] = useState(0);
 
   const updateUserFields = (userNewFields: Partial<UserType>) => {
     setUser((userPrev) => {
@@ -46,6 +47,8 @@ const UserForm = (): ReactElement => {
       user={user}
       onChange={onChange}
       updateUserFields={updateUserFields}
+      errors={errors}
+      nextWasClicked={nextWasClicked}
     />,
     <UserFormSecond
       user={user}
@@ -103,6 +106,8 @@ const UserForm = (): ReactElement => {
         }
       }
     }
+
+    setNextWasClicked((prev) => prev + 1);
   };
 
   useEffect(() => {
@@ -137,12 +142,6 @@ const UserForm = (): ReactElement => {
         <div className="user-form__current-step">
           {currentStep + 1} / {steps.length}
         </div>
-        {errors &&
-          errors.map((error) => (
-            <p className="user-form__error" key={error}>
-              {error}
-            </p>
-          ))}
         {step}
         <div className="user-form__btns">
           <button className="user-form__btn">

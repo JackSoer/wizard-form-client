@@ -37,8 +37,9 @@ export const MembersContextProvider = ({
         setIsLoading(true);
 
         const response = await axios.get('/users');
+        const users = response?.data?.users.reverse();
 
-        setMembers(response?.data?.users.reverse());
+        setMembers(users);
 
         setFetchError('');
       } catch (err: any) {

@@ -8,6 +8,7 @@ type PhoneInputProps = {
 
 const PhoneInput = ({ updateUserFields }: PhoneInputProps): ReactElement => {
   const [inputValue, setInputValue] = useState('+1');
+  const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
 
   const formatPhoneNumber = (value: string): string => {
     if (!value) return value;
@@ -29,10 +30,20 @@ const PhoneInput = ({ updateUserFields }: PhoneInputProps): ReactElement => {
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsValidPhoneNumber(true);
+
     const formattedNumber = formatPhoneNumber(e.target.value);
     setInputValue(formattedNumber);
 
     updateUserFields({ phone: formattedNumber });
+  };
+
+  const handleValidation = (phoneNumber: string) => {
+    if (phoneNumber.length !== 17) {
+      setIsValidPhoneNumber(false);
+    } else {
+      setIsValidPhoneNumber(true);
+    }
   };
 
   return (
@@ -47,9 +58,15 @@ const PhoneInput = ({ updateUserFields }: PhoneInputProps): ReactElement => {
         required
         value={inputValue}
         onChange={(e) => handleChange(e)}
-        placeholder="(xxx) xxx-xxxx"
+        onBlur={() => handleValidation(inputValue)}
+        placeholder="+1 (xxx) xxx-xxxx"
         className="phone-input"
       />
+      {!isValidPhoneNumber && (
+        <span className="error">
+          Phone should be in +1 (xxx) xxx-xxxx format
+        </span>
+      )}
     </div>
   );
 };

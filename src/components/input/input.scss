@@ -4,10 +4,6 @@
   font-size: 18px;
   font-weight: 500;
   box-shadow: 0 0 4px gray;
-
-  &:invalid[focused='true'] {
-    box-shadow: 0 0 4px red;
-  }
 }
 
 .label {
@@ -22,14 +18,14 @@
   gap: 4px;
 }
 
-.error {
+.pattern-error {
   color: red;
-  margin-top: 4px;
-  display: none;
   font-size: 12px;
   line-height: 15px;
+  display: none;
 }
 
-.input:invalid[focused='true'] ~ .error {
+.input:invalid[focused='true'] ~ .pattern-error {
   display: block;
+  margin-top: 4px;
 }
