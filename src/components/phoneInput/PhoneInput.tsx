@@ -7,20 +7,22 @@ type PhoneInputProps = {
 };
 
 const PhoneInput = ({ updateUserFields }: PhoneInputProps): ReactElement => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState('+1');
 
   const formatPhoneNumber = (value: string): string => {
     if (!value) return value;
 
-    const phoneNumber = value.replace(/[^\d]/g, '');
+    const phoneNumber = value.replace(/^\+1|\D+/g, '');
     const phoneLength = phoneNumber.length;
 
-    if (phoneLength < 4) return phoneNumber;
+    if (phoneLength < 4) {
+      return `+1 ${phoneNumber}`;
+    }
     if (phoneLength < 7) {
-      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+      return `+1 (${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
     }
 
-    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+    return `+1 (${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
       3,
       6
     )}-${phoneNumber.slice(6, 10)}`;

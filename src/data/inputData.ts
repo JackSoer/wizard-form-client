@@ -5,7 +5,7 @@ const inputData = {
       name: 'firstName',
       id: 'firstName',
       required: true,
-      pattern: '^[A-Za-z0-9]{2,20}',
+      pattern: '^(?:[A-Za-z0-9 ]{2,20})$',
       label: 'First Name',
       errorMsg:
         "First name should be 2-20 characters and shouldn't include any special character.",
@@ -15,20 +15,35 @@ const inputData = {
       name: 'lastName',
       id: 'lastName',
       required: true,
-      pattern: '^[A-Za-z0-9]{2,20}',
+      pattern: '^(?:[A-Za-z0-9 ]{2,20})$',
       label: 'Last Name',
       errorMsg:
         "Last name should be 2-20 characters and shouldn't include any special character.",
+    },
+    {
+      name: 'birthdate',
+      type: 'date',
+      id: 'birthdate',
+      required: true,
     },
     {
       type: 'text',
       name: 'reportSubject',
       id: 'reportSubject',
       required: true,
-      pattern: '^[A-Za-z0-9]{2,20}',
+      pattern: '^(?:[A-Za-z0-9 ]{2,50})$',
       label: 'Report Subject',
       errorMsg:
-        "Report subject should be 2-20 characters and shouldn't include any special character.",
+        "Report subject should be 2-50 characters and shouldn't include any special character.",
+    },
+    {
+      name: 'country',
+      id: 'country',
+      required: true,
+      label: 'Country',
+    },
+    {
+      name: 'phone',
     },
     {
       type: 'email',

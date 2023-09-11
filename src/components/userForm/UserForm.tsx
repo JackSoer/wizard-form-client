@@ -37,7 +37,8 @@ const UserForm = (): ReactElement => {
   };
 
   const onChange = (e: any) => {
-    updateUserFields({ [e.target.name]: e.target.value });
+    const valueWithoutLeadingSpaces = e.target.value.replace(/^\s+/, '');
+    updateUserFields({ [e.target.name]: valueWithoutLeadingSpaces });
   };
 
   const { steps, step, next, currentStep, isLastStep } = useMultiform([
