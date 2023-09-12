@@ -4,10 +4,14 @@ import './phoneInput.scss';
 
 type PhoneInputProps = {
   updateUserFields: (userNewFields: Partial<UserType>) => void;
+  phone: string;
 };
 
-const PhoneInput = ({ updateUserFields }: PhoneInputProps): ReactElement => {
-  const [inputValue, setInputValue] = useState('+1');
+const PhoneInput = ({
+  updateUserFields,
+  phone,
+}: PhoneInputProps): ReactElement => {
+  const [inputValue, setInputValue] = useState(phone || '+1');
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
 
   const formatPhoneNumber = (value: string): string => {

@@ -42,25 +42,45 @@ const UserForm = (): ReactElement => {
     updateUserFields({ [e.target.name]: valueWithoutLeadingSpaces });
   };
 
-  const { steps, step, next, currentStep, isLastStep } = useMultiform([
-    <UserFormFirst
-      user={user}
-      onChange={onChange}
-      updateUserFields={updateUserFields}
-      errors={errors}
-      nextWasClicked={nextWasClicked}
-    />,
-    <UserFormSecond
-      user={user}
-      onChange={onChange}
-      updateUserFields={updateUserFields}
-    />,
-  ]);
+  const { steps, step, next, prev, currentStep, isLastStep, isFirstStep } =
+    useMultiform([
+      <UserFormFirst
+        user={user}
+        onChange={onChange}
+        updateUserFields={updateUserFields}
+        errors={errors}
+        nextWasClicked={nextWasClicked}
+      />,
+      <UserFormSecond
+        user={user}
+        onChange={onChange}
+        updateUserFields={updateUserFields}
+      />,
+    ]);
 
   const clearLocalStorage = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('userId');
     localStorage.removeItem('currentStep');
+  };
+
+  const saveUser = () => {
+    localStorage.setItem(
+      'user',
+      JSON.stringify({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        birthdate: user.birthdate,
+        reportSubject: user.reportSubject,
+        country: user.country,
+        phone: user.phone,
+        email: user.email,
+        company: '',
+        position: '',
+        aboutMe: '',
+        photo: '',
+      })
+    );
   };
 
   const onSubmit = async (e: FormEvent) => {
@@ -72,66 +92,72 @@ const UserForm = (): ReactElement => {
       formData.append(key, user[key as keyof UserType] as string | File);
     }
 
-    if (!isLastStep()) {
+    const userId: string = localStorage.getItem('userId') || '';
+
+    if (!userId) {
       try {
         const response = await axios.post('/users', formData);
 
-        localStorage.setItem('userId', JSON.stringify(response.data?.userId));
+        localStorage.setItem('userId', response.data?.userId);
 
         setErrors([]);
 
-        next();
+        setNextWasClicked((prev) => prev + 1);
       } catch (err) {
         console.log(err);
 
         if (err instanceof AxiosError) {
           setErrors(err?.response?.data?.errors || [err.message]);
         }
+
+        setNextWasClicked((prev) => prev + 1);
+
+        return;
       }
     } else {
       try {
-        const userId = JSON.parse(localStorage.getItem('userId') || '-1');
         await axios.post(`/users/${userId}`, formData);
 
         setErrors([]);
 
-        clearLocalStorage();
-
-        navigate('/share');
+        setNextWasClicked((prev) => prev + 1);
       } catch (err) {
         console.log(err);
 
         if (err instanceof AxiosError) {
           setErrors(err?.response?.data?.errors || [err.message]);
         }
+
+        setNextWasClicked((prev) => prev + 1);
+
+        return;
       }
     }
 
-    setNextWasClicked((prev) => prev + 1);
+    if (isLastStep()) {
+      clearLocalStorage();
+
+      navigate('/share');
+    } else {
+      saveUser();
+
+      next();
+    }
   };
 
   useEffect(() => {
-    if (isLastStep()) {
-      localStorage.setItem(
-        'user',
-        JSON.stringify({
-          firstName: user.firstName,
-          lastName: user.lastName,
-          birthdate: user.birthdate,
-          reportSubject: user.reportSubject,
-          country: user.country,
-          phone: user.phone,
-          email: user.email,
-          company: '',
-          position: '',
-          aboutMe: '',
-          photo: '',
-        })
-      );
-    } else {
+    if (isFirstStep()) {
       localStorage.removeItem('user');
+    } else {
+      saveUser();
     }
   }, [currentStep]);
+
+  useEffect(() => {
+    if (isFirstStep()) {
+      localStorage.removeItem('userId');
+    }
+  }, []);
 
   return (
     <div className="user-form">
@@ -144,6 +170,11 @@ const UserForm = (): ReactElement => {
         </div>
         {step}
         <div className="user-form__btns">
+          {!isFirstStep() && (
+            <button className="user-form__btn" onClick={prev}>
+              Back
+            </button>
+          )}
           <button className="user-form__btn">
             {isLastStep() ? 'Finish' : 'Next'}
           </button>

@@ -71,7 +71,7 @@ const UserFormFirst = ({
           );
         } else if (input.name === 'phone') {
           return (
-            <PhoneInput updateUserFields={updateUserFields} key={input.name} />
+            <PhoneInput updateUserFields={updateUserFields} key={input.name} phone={user.phone}/>
           );
         } else if (input.name === 'email') {
           return (
