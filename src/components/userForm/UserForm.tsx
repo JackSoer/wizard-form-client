@@ -83,14 +83,30 @@ const UserForm = (): ReactElement => {
     );
   };
 
+  const getFormData = (): FormData => {
+    const formData = new FormData();
+
+    if (isFirstStep()) {
+      for (const key in user) {
+        if (key === 'company') {
+          break;
+        }
+
+        formData.append(key, user[key as keyof UserType] as string | File);
+      }
+    } else {
+      for (const key in user) {
+        formData.append(key, user[key as keyof UserType] as string | File);
+      }
+    }
+
+    return formData;
+  };
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const formData = new FormData();
-
-    for (const key in user) {
-      formData.append(key, user[key as keyof UserType] as string | File);
-    }
+    const formData = getFormData();
 
     const userId: string = localStorage.getItem('userId') || '';
 
